@@ -1,22 +1,23 @@
 import cv2
-import pafy
+# import pafy
 
 from YOLOv7 import YOLOv7
 
 # # Initialize video
 # cap = cv2.VideoCapture("input.mp4")
 
-videoUrl = 'https://youtu.be/zPre8MgmcHY'
-videoPafy = pafy.new(videoUrl)
-print(videoPafy.streams)
-cap = cv2.VideoCapture(videoPafy.streams[-1].url)
+# videoUrl = 'https://youtu.be/zPre8MgmcHY'
+# videoPafy = pafy.new(videoUrl)
+# print(videoPafy.streams)
+# cap = cv2.VideoCapture(videoPafy.streams[-1].url)
+cap= cv2.VideoCapture('20190408041414_020352AA.mp4')
 start_time = 0  # skip first {start_time} seconds
 cap.set(cv2.CAP_PROP_POS_FRAMES, start_time * 30)
 
 # out = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 30, (1280, 720))
 
 # Initialize YOLOv7 model
-model_path = "models/yolov7_384x640.onnx"
+model_path = "models/yolov7-tiny_736x1280.onnx"
 yolov7_detector = YOLOv7(model_path, conf_thres=0.5, iou_thres=0.5)
 
 cv2.namedWindow("Detected Objects", cv2.WINDOW_NORMAL)
